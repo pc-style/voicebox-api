@@ -46,7 +46,12 @@ EOF
 5. Create directories:
    mkdir -p checkpoints/s2-pro references data
 
-6. Download models (10-20 minutes):
+6. Copy reference audio and English texts from voicebox-api:
+   cp /opt/voicebox-api/assets/reference.mp3 /opt/fish-speech/references/
+   cp /opt/voicebox-api/assets/reference.txt /opt/fish-speech/references/
+   unzip -q /opt/voicebox-api/assets/english-texts.zip -d /opt/fish-speech/references/
+
+7. Download models (10-20 minutes):
    pip install -q huggingface_hub
    python3 << 'PYEOF'
 from huggingface_hub import snapshot_download
@@ -60,17 +65,17 @@ snapshot_download(
 print("Models downloaded!")
 PYEOF
 
-7. Start Docker container:
+8. Start Docker container:
    cd /opt/fish-speech
    docker compose --profile server up -d --build
 
-8. Wait 30 seconds, then verify API is running:
+9. Wait 30 seconds, then verify API is running:
    curl http://127.0.0.1:8080/v1/health
 
-9. Check GPU is detected:
+10. Check GPU is detected:
    docker compose exec server nvidia-smi
 
-10. Setup firewall:
+11. Setup firewall:
     apt-get install -y ufw
     ufw --force enable
     ufw default deny incoming
