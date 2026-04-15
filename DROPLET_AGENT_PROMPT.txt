@@ -4,6 +4,12 @@ YOU ARE: Already SSH'd into droplet as root at 162.243.235.203
 
 WHAT TO DO:
 
+0. Clone voicebox-api repo:
+   cd /opt
+   rm -rf voicebox-api
+   git clone https://github.com/pc-style/voicebox-api.git voicebox-api
+   cd voicebox-api
+
 1. Install base packages:
    apt-get update -y
    apt-get install -y git curl wget python3 python3-pip build-essential
